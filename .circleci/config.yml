@@ -31,8 +31,17 @@ jobs:
           command: "echo World!"
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+  print-env-variable:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+     - checkout
+     - run:
+        name: "print env var"
+        command: "echo MY_ENV_VAR"
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
       - say-world
+      - print-env-variable
