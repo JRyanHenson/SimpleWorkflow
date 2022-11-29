@@ -38,7 +38,7 @@ jobs:
      - checkout
      - run:
         name: "print env var"
-        command: "print  << MY_ENV_VAR >>"
+        command: "print  <<MY_ENV_VAR>>"
 workflows:
   say-hello-workflow:
     jobs:
