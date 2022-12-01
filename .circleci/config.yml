@@ -30,7 +30,6 @@ jobs:
           name: "Say world"
           command: "echo World!"
   save-hello-world:
-    save-hello-world:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -47,7 +46,6 @@ jobs:
           paths: 
            - output.txt
   print-output-file:
-    print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -73,6 +71,6 @@ workflows:
       - say-world
       - print-env-variable
       - save-hello-world
-      - print_output_file:
+      - print-output-file:
           requires:
             - save-hello-world
