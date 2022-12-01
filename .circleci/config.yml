@@ -72,7 +72,7 @@ workflows:
       - say-hello
       - say-world
       - print-env-variable
-      - save_hello_world
+      - save-hello-world
       - print_output_file:
           requires:
-            - save_hello_world
+            - save-hello-world
