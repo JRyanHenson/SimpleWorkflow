@@ -2,9 +2,27 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+
+
+commands:
+  print-pipline-id:
+    description:
+    parameters:
+      to:
+        type: string  
+        default: $CIRCLE_WORKFLOW_ID
+      steps:
+        -run: echo << parameters.to >>
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+
 jobs:
+  print-pipeline-id:
+  docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - print-pipeline-id:
   say-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -61,15 +79,7 @@ jobs:
      - run:
         name: "print env var"
         command: echo $MY_ENV_VAR
-  commands:
-    print-pipline-id:
-      description:
-      parameters:
-        to:
-          type: string  
-          default: $CIRCLE_WORKFLOW_ID
-        steps:
-          -run: echo << parameters.to >>
+
   
 
 # Invoke jobs via workflows
