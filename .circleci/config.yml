@@ -19,7 +19,7 @@ commands:
 
 jobs:
   print-pipeline-id:
-  docker:
+    docker:
       - image: circleci/node:13.8.0
     steps:
       - print-pipeline-id:
