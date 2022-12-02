@@ -29,7 +29,7 @@ jobs:
       - run:
           name: "Say world"
           command: "echo World!"
-  save-hello-world:
+  save-hello-world: 
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -61,6 +61,16 @@ jobs:
      - run:
         name: "print env var"
         command: echo $MY_ENV_VAR
+  commands:
+    print-pipline-id:
+      description:
+      parameters:
+        to:
+          type: string  
+          default: $CIRCLE_WORKFLOW_ID
+        steps:
+          -run: echo << parameters.to >>
+  
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -71,6 +81,7 @@ workflows:
       - say-world
       - print-env-variable
       - save-hello-world
+      - print-pipeline-id
       - print-output-file:
           requires:
             - save-hello-world
