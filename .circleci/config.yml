@@ -6,13 +6,8 @@ version: 2.1
 
 commands:
   print-pipline-id:
-    description:
-    parameters:
-      to:
-        type: string  
-        default: $CIRCLE_WORKFLOW_ID
-      steps:
-        -run: echo << parameters.to >>
+    steps:
+      -run: echo ${CIRCLE_WORFLOW_ID}
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -75,10 +70,7 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-     - checkout
-     - run:
-        name: "print env var"
-        command: echo $MY_ENV_VAR
+     - print_pipeline_id
 
   
 
