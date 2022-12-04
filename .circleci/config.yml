@@ -4,9 +4,6 @@ version: 2.1
 
 commands:
   print-pipeline-id:
-    parameters:
-      to:
-        type: array
     steps:
       -run:  echo ${CIRCLE_WORKFLOW_ID}
 
@@ -19,62 +16,62 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - print-pipeline-id
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: circleci/node:13.8.0
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello"
-  say-world:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: circleci/node:13.8.0
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "Say world"
-          command: "echo World!"
-  save-hello-world: 
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: circleci/node:13.8.0
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - run: echo "Hello World!" > ~/output.txt
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
-          # taken to be the root directory of the workspace.
-          root: ~/
-          # Must be relative path from root
-          paths: 
-           - output.txt
-  print-output-file:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: cat ~/output.txt
+  # say-hello:
+  #   # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   # Add steps to the job
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "Say hello"
+  #         command: "echo Hello"
+  # say-world:
+  #   # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   # Add steps to the job
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "Say world"
+  #         command: "echo World!"
+  # save-hello-world: 
+  #   # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   # Add steps to the job
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  #   steps:
+  #     - run: echo "Hello World!" > ~/output.txt
+  #     - persist_to_workspace:
+  #         # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+  #         # taken to be the root directory of the workspace.
+  #         root: ~/
+  #         # Must be relative path from root
+  #         paths: 
+  #          - output.txt
+  # print-output-file:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - attach_workspace:
+  #         at: ~/
+  #     - run: cat ~/output.txt
           
-  print-env-variable:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-     - checkout
-     - run:
-        name: "print env var"
-        command: echo $MY_ENV_VAR
+  # print-env-variable:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #    - checkout
+  #    - run:
+  #       name: "print env var"
+  #       command: echo $MY_ENV_VAR
 
   
 
@@ -83,11 +80,11 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
-      - say-world
-      - print-env-variable
-      - save-hello-world
+      # - say-hello
+      # - say-world
+      # - print-env-variable
+      # - save-hello-world
       - print-pipeline
-      - print-output-file:
-          requires:
-            - save-hello-world
+      # - print-output-file:
+      #     requires:
+      #       - save-hello-world
