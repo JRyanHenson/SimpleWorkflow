@@ -2,24 +2,32 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-commands:
-  print-pipeline-id:
-    parameters:
-      id:
-        type: string
-    steps:
-      - run:  echo << parameters.id >>
+# commands:
+#   print-pipeline-id:
+#     parameters:
+#       id:
+#         type: string
+#     steps:
+#       - run:  echo << parameters.id >>
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+# # Define a job to be invoked later in a workflow.
+# # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 
 jobs:
-  print-pipeline:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - print-pipeline-id:
-          id: << pipeline.id >>
+  Fail:
+    Steps:
+      - run: return 1
+
+      - run:
+          name: Upload Failed Tests
+          command: echo "You Failed!"
+          when: on_fail
+#   print-pipeline:
+#     docker:
+#       - image: circleci/node:13.8.0
+#     steps:
+#       - print-pipeline-id:
+#           id: << pipeline.id >>
   # say-hello:
   #   # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
   #   # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -88,7 +96,8 @@ workflows:
       # - say-world
       # - print-env-variable
       # - save-hello-world
-      - print-pipeline
+      # - print-pipeline
+      - Fail
       # - print-output-file:
       #     requires:
       #       - save-hello-world
