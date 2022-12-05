@@ -15,9 +15,10 @@ version: 2.1
 
 jobs:
   Fail:
-    Steps:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
       - run: return 1
-
       - run:
           name: Upload Failed Tests
           command: echo "You Failed!"
